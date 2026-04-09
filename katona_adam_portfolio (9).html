@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://cdn.download.ams.birds.cornell.edu; script-src 'self' 'unsafe-inline'; connect-src https://search.macaulaylibrary.org;">
+<title>Katona Ádám — Portfólió</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a14; --cream: #f5f0e8; --warm: #e8dcc8; --moss: #4a5c3a;
+    --gold: #b8913a; --pale: #f9f6f0; --nav-bg: rgba(245,240,232,0.92);
+    --card-bg: #f5f0e8; --card-hover: #e8dcc8; --subtitle-color: rgba(26,26,20,0.75);
+    --archive-note: rgba(26,26,20,0.45);
+  }
+  html[data-theme="dark"] {
+    --ink: #e8e0d0; --cream: #161612; --warm: #1e1e18; --pale: #1a1a14;
+    --nav-bg: rgba(22,22,18,0.92); --card-bg: #1a1a14; --card-hover: #222218;
+    --subtitle-color: rgba(232,224,208,0.7); --archive-note: rgba(232,224,208,0.35);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Crimson Pro', serif; background: var(--cream); color: var(--ink); overflow-x: hidden; transition: background 0.3s, color 0.3s; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: var(--nav-bg); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(74,92,58,0.15); transition: background 0.3s; }
+  .nav-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; letter-spacing: 0.05em; color: var(--moss); }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); text-decoration: none; opacity: 0.85; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; color: var(--moss); }
+  .nav-controls { display: flex; align-items: center; gap: 0.8rem; }
+  .lang-toggle { display: flex; border: 1px solid rgba(74,92,58,0.3); overflow: hidden; }
+  .lang-btn { padding: 0.3rem 0.7rem; font-family: 'Crimson Pro', serif; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: none; background: transparent; color: var(--ink); opacity: 0.6; transition: all 0.2s; }
+  .lang-btn.active { background: var(--moss); color: #f5f0e8; opacity: 1; }
+  .toggle-label { font-size: 1rem; cursor: pointer; user-select: none; }
+  .dark-toggle { width: 36px; height: 20px; background: rgba(74,92,58,0.3); border-radius: 10px; position: relative; cursor: pointer; border: none; transition: background 0.3s; flex-shrink: 0; }
+  .dark-toggle.on { background: var(--moss); }
+  .dark-toggle::after { content: ''; position: absolute; width: 14px; height: 14px; background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.3s; }
+  .dark-toggle.on::after { transform: translateX(16px); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+  .hero-left { display: flex; flex-direction: column; justify-content: flex-end; padding: 8rem 4rem 5rem 4rem; position: relative; z-index: 2; }
+  .hero-eyebrow { font-size: 0.9rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--moss); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4vw, 4.2rem); line-height: 1.08; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+  .hero-subtitle { font-size: 1.15rem; font-weight: 300; line-height: 1.75; max-width: 42ch; color: var(--subtitle-color); margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.9s forwards; }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2rem; font-family: 'Crimson Pro', serif; font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; border: none; cursor: pointer; transition: all 0.25s; }
+  .btn-primary { background: var(--moss); color: #f5f0e8; }
+  .btn-primary:hover { background: var(--ink); color: var(--cream); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid rgba(74,92,58,0.4); }
+  .btn-outline:hover { border-color: var(--moss); color: var(--moss); }
+  .hero-right { position: relative; overflow: hidden; background: #0a1208; }
+  .hero-right-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; z-index: 1; opacity: 0.88; }
+  .hero-bird-bg { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,18,8,0.2) 0%, rgba(10,18,8,0.7) 100%); z-index: 2; }
+  .hero-stat-grid { position: absolute; bottom: 4rem; left: 2rem; right: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); z-index: 3; }
+  .hero-stat { background: rgba(10,18,8,0.78); backdrop-filter: blur(6px); padding: 1.5rem; text-align: center; }
+  .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 0.3rem; }
+  .hero-stat-label { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,240,232,0.9); }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+  .section-label { font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--moss); margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 3.5vw, 3.2rem); line-height: 1.15; margin-bottom: 1.5rem; }
+  .section-divider { width: 60px; height: 1px; background: var(--gold); margin-bottom: 2rem; }
+
+  /* SPECIES — always dark regardless of theme */
+  .species-section { background: #1a1a14; color: #f5f0e8; position: relative; overflow: hidden; }
+  html[data-theme="dark"] .species-section { background: #0e0e0a; }
+  .species-section::before { content: 'SPECIES'; position: absolute; top: -1rem; right: -1rem; font-family: 'Playfair Display', serif; font-size: 12rem; font-weight: 700; color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; }
+  .species-section .section-label { color: rgba(184,145,58,0.8); }
+  .species-counter-wrap { display: flex; align-items: center; gap: 6rem; flex-wrap: wrap; }
+  .counter-display { text-align: center; flex-shrink: 0; }
+  .counter-num { font-family: 'Playfair Display', serif; font-size: 8rem; color: var(--gold); line-height: 1; display: inline-block; }
+  .counter-label { font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.85); margin-top: 0.5rem; }
+  .species-breakdown { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .species-group { border-left: 2px solid rgba(184,145,58,0.3); padding-left: 1.2rem; }
+  .species-group-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); display: block; }
+  .species-group-name { font-size: 1rem; color: rgba(245,240,232,0.9); margin-top: 0.2rem; }
+  .species-group-name em { font-style: italic; color: rgba(245,240,232,0.7); font-size: 0.9rem; }
+  .ebird-link { margin-top: 2.5rem; display: inline-flex; align-items: center; gap: 0.6rem; color: var(--gold); text-decoration: none; font-size: 1rem; letter-spacing: 0.08em; border-bottom: 1px solid rgba(184,145,58,0.4); padding-bottom: 2px; transition: border-color 0.2s; }
+  .ebird-link:hover { border-color: var(--gold); }
+
+  /* FEATURED WORK */
+  .pub-section { background: var(--pale); transition: background 0.3s; }
+  .pub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px; margin-top: 2rem; background: rgba(74,92,58,0.1); }
+  .pub-card { background: var(--card-bg); padding: 1.8rem 1.6rem; text-decoration: none; color: var(--ink); transition: background 0.2s; border-top: 3px solid transparent; display: block; }
+  .pub-card:hover { background: var(--card-hover); border-top-color: var(--gold); }
+  .pub-outlet { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--moss); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+  .pub-outlet::before { content: ''; width: 20px; height: 1px; background: var(--moss); display: inline-block; flex-shrink: 0; }
+  .pub-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; line-height: 1.3; margin-bottom: 0.7rem; }
+  .pub-desc { font-size: 1.05rem; color: rgba(26,26,20,0.7); line-height: 1.6; }
+  html[data-theme="dark"] .pub-desc { color: rgba(232,224,208,0.7); }
+  .pub-arrow { margin-top: 1.2rem; font-size: 1.3rem; color: var(--gold); display: inline-block; transition: transform 0.2s; }
+  .pub-card:hover .pub-arrow { transform: translateX(4px); }
+
+  /* GALLERY */
+  .gallery-section { background: var(--cream); transition: background 0.3s; }
+  .gallery-intro { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+  .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 260px 260px; gap: 3px; }
+  .gallery-item { background: var(--warm); overflow: hidden; position: relative; cursor: pointer; transition: background 0.3s; }
+  .gallery-item:first-child { grid-row: span 2; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; filter: saturate(0.9); }
+  .gallery-item:hover img { transform: scale(1.04); filter: saturate(1.1); }
+  .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,30,15,0.75) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 1.2rem; }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-species { font-family: 'Playfair Display', serif; font-style: italic; color: #f5f0e8; font-size: 1.1rem; }
+  .gallery-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, var(--warm) 0%, #d8ccb0 100%); }
+  html[data-theme="dark"] .gallery-placeholder { background: linear-gradient(135deg, #222218 0%, #1a1a12 100%); }
+  .gallery-placeholder span { font-size: 3rem; }
+  .gallery-placeholder p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: rgba(26,26,20,0.55); }
+  html[data-theme="dark"] .gallery-placeholder p { color: rgba(232,224,208,0.45); }
+  .archive-note { margin-top: 1.5rem; font-size: 0.95rem; color: var(--archive-note); font-style: italic; }
+
+  /* PUBLICATIONS / WRITINGS */
+  .writings-section { background: var(--pale); transition: background 0.3s; }
+  .writings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2px; margin-top: 2rem; background: rgba(74,92,58,0.1); }
+  .writing-card { background: var(--card-bg); padding: 2rem 1.8rem; color: var(--ink); transition: background 0.2s; border-top: 3px solid transparent; display: flex; flex-direction: column; text-decoration: none; }
+  .writing-card:hover { background: var(--card-hover); border-top-color: var(--gold); }
+  .writing-card--empty { min-height: 160px; align-items: center; justify-content: center; border-top-color: rgba(74,92,58,0.15); }
+  .writing-empty-label { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: rgba(26,26,20,0.4); text-align: center; }
+  html[data-theme="dark"] .writing-empty-label { color: rgba(232,224,208,0.3); }
+  .writing-date { font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--moss); margin-bottom: 0.5rem; }
+  .writing-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; line-height: 1.3; margin-bottom: 0.7rem; }
+  .writing-excerpt { font-size: 1rem; color: rgba(26,26,20,0.65); line-height: 1.65; flex: 1; }
+  html[data-theme="dark"] .writing-excerpt { color: rgba(232,224,208,0.65); }
+  .writing-arrow { margin-top: 1.2rem; font-size: 1.2rem; color: var(--gold); display: inline-block; transition: transform 0.2s; }
+  .writing-card:hover .writing-arrow { transform: translateX(4px); }
+
+  /* ABOUT */
+  .about-section { background: var(--moss); color: #f5f0e8; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .about-text .section-label { color: rgba(245,240,232,0.7); }
+  .about-text .section-title { color: #f5f0e8; }
+  .about-body { font-size: 1.15rem; line-height: 1.85; color: rgba(245,240,232,0.9); margin-bottom: 2rem; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .tag { padding: 0.35rem 0.9rem; border: 1px solid rgba(245,240,232,0.35); font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.85); }
+  .about-aside { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; flex-direction: column; gap: 0.2rem; border-bottom: 1px solid rgba(245,240,232,0.15); padding-bottom: 1.5rem; }
+  .contact-item-label { font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.6); }
+  .contact-item-value { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #f5f0e8; text-decoration: none; }
+  .contact-item-value:hover { color: var(--gold); }
+
+  /* FOOTER */
+  footer { background: #0e0e0a; color: rgba(245,240,232,0.55); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-name { font-family: 'Playfair Display', serif; color: #f5f0e8; font-size: 1.05rem; }
+  .footer-copy { font-size: 0.9rem; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes featherFloat { 0%, 100% { transform: translate(-50%, -55%) rotate(-5deg); } 50% { transform: translate(-50%, -52%) rotate(3deg); } }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .hero-right { min-height: 320px; }
+    section { padding: 4rem 1.5rem; }
+    .species-counter-wrap { gap: 2rem; }
+    .counter-num { font-size: 5rem; }
+    .about-section { grid-template-columns: 1fr; gap: 3rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item:first-child { grid-row: span 1; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Katona Ádám</span>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#species" data-hu="Életlista" data-en="Species">Életlista</a></li>
+      <li><a href="#publications" data-hu="Munkák" data-en="Work">Munkák</a></li>
+      <li><a href="#photos" data-hu="Fotók" data-en="Photos">Fotók</a></li>
+      <li><a href="#writings" data-hu="Publikációk" data-en="Publications">Publikációk</a></li>
+      <li><a href="#about" data-hu="Rólam" data-en="About">Rólam</a></li>
+    </ul>
+    <div class="nav-controls">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btnHU" onclick="setLang('hu')">HU</button>
+        <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+      </div>
+      <span class="toggle-label" id="darkLabel" onclick="toggleDark()">🌙</span>
+      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" aria-label="Toggle dark mode"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="hero-left">
+    <p class="hero-eyebrow" data-hu="Madárfotós · Tanuló ornitológus · Budapest" data-en="Ornithology Student · Wildlife Photographer · Budapest">Madárfotós · Tanuló ornitológus · Budapest</p>
+    <h1 class="hero-title" data-hu="Katona Ádám portfóliója" data-en="Ádám Katona Portfolio">Katona Ádám portfóliója</h1>
+    <p class="hero-subtitle" data-hu="Tanuló ornitológus és természetfotós, Budapest. Fotóim megjelentek a National Geographic Magyarország, a Bükki Nemzeti Park Igazgatóság és a Hortobágyi Nemzeti Park Igazgatóság oldalain. A WWF Magyarország PandaBanda Regeneráció tagja. Jelenleg a Cornell Lab Átfogó Madárbiológia kurzusát hallgatom — fajokat naplózok, checklistákat töltök fel, és minden lehetséges időt a terepen töltök." data-en="Ornithology student and wildlife photographer based in Budapest. Photos appeared in National Geographic Hungary, Bükki Nemzeti Park, and Hortobágy Nemzeti Park. Member of WWF Hungary's PandaBanda Regeneráció. Currently completing Cornell Lab's Comprehensive Bird Biology course — logging species, submitting checklists, and spending as much time in the field as possible.">Tanuló ornitológus és természetfotós, Budapest. Fotóim megjelentek a National Geographic Magyarország, a Bükki Nemzeti Park Igazgatóság és a Hortobágyi Nemzeti Park Igazgatóság oldalain. A WWF Magyarország PandaBanda Regeneráció tagja. Jelenleg a Cornell Lab Átfogó Madárbiológia kurzusát hallgatom — fajokat naplózok, checklistákat töltök fel, és minden lehetséges időt a terepen töltök.</p>
+    <div class="hero-ctas">
+      <a href="https://ebird.org/profile/ODU4MjM5Nw/HU" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-hu="eBird profil →" data-en="View eBird Profile →">eBird profil →</a>
+      <a href="https://media.ebird.org/catalog?birdOnly=true&mediaType=photo&userId=USER8582397" target="_blank" rel="noopener noreferrer" class="btn btn-outline" data-hu="Fotók böngészése" data-en="Browse Photos">Fotók böngészése</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-right-img" src="hero_heron.jpg" alt="Grey Heron in flight — Ardea cinerea">
+    <div class="hero-bird-bg"></div>
+    <div class="hero-stat-grid">
+      <div class="hero-stat">
+        <span class="hero-stat-num" id="counterChecklists">0</span>
+        <span class="hero-stat-label" data-hu="Checklista 2026-ban" data-en="Checklists in 2026">Checklista 2026-ban</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num" id="counterSpecies">0</span>
+        <span class="hero-stat-label" data-hu="Megfigyelt faj 2026-ban" data-en="Species in 2026">Megfigyelt faj 2026-ban</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">14</span>
+        <span class="hero-stat-label" data-hu="Faj egy nap alatt" data-en="Species in one day">Faj egy nap alatt</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">6</span>
+        <span class="hero-stat-label" data-hu="Fotómegjelenés" data-en="Photo appearances">Fotómegjelenés</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIES COUNTER -->
+<section class="species-section" id="species">
+  <div class="section-label" data-hu="Életlista" data-en="Life List">Életlista</div>
+  <div class="species-counter-wrap">
+    <div class="counter-display">
+      <div class="counter-num"><span id="bigCounter">0</span></div>
+      <div class="counter-label" data-hu="Megfigyelt faj 2026-ban" data-en="Species Observed in 2026">Megfigyelt faj 2026-ban</div>
+      <a href="https://ebird.org/profile/ODU4MjM5Nw/HU" target="_blank" rel="noopener noreferrer" class="ebird-link" data-hu="Teljes lista az eBirden ↗" data-en="Full list on eBird ↗">Teljes lista az eBirden ↗</a>
+    </div>
+    <div class="species-breakdown">
+      <div class="species-group">
+        <span class="species-group-num">6</span>
+        <div class="species-group-name" data-hu="Harkályfaj<br><em style='font-size:0.9rem;color:rgba(245,240,232,0.75)'>Harkályspecialista</em>" data-en="Woodpecker species<br><em style='font-size:0.9rem;color:rgba(245,240,232,0.75)'>Woodpecker specialist</em>">Harkályfaj<br><em style="font-size:0.9rem;color:rgba(245,240,232,0.75)">Harkályspecialista</em></div>
+      </div>
+      <div class="species-group">
+        <span class="species-group-num">14</span>
+        <div class="species-group-name" data-hu="Faj egy nap alatt<br><em style='font-size:0.9rem;color:rgba(245,240,232,0.75)'>Hortobágy, 2026. ápr. 5.</em>" data-en="Species in one day<br><em style='font-size:0.9rem;color:rgba(245,240,232,0.75)'>Hortobágy, 5 Apr 2026</em>">Faj egy nap alatt<br><em style="font-size:0.9rem;color:rgba(245,240,232,0.75)">Hortobágy, 2026. ápr. 5.</em></div>
+      </div>
+      <div class="species-group">
+        <span class="species-group-num">115</span>
+        <div class="species-group-name" data-hu="Checklista<br><em style='font-size:0.9rem;color:rgba(245,240,232,0.75)'>2026-ban</em>" data-en="Checklists<br><em style='font-size:0.9rem;color:rgba(245,240,232,0.75)'>in 2026</em>">Checklista<br><em style="font-size:0.9rem;color:rgba(245,240,232,0.75)">2026-ban</em></div>
+      </div>
+      <div class="species-group">
+        <span class="species-group-num" style="font-size:1.4rem;line-height:1.2">Kanalasgém</span>
+        <div class="species-group-name" data-hu="Különleges megfigyelés<br><em style='font-size:0.9rem;color:rgba(245,240,232,0.75)'>Platalea leucorodia</em>" data-en="Notable sighting<br><em style='font-size:0.9rem;color:rgba(245,240,232,0.75)'>Platalea leucorodia</em>">Különleges megfigyelés<br><em style="font-size:0.9rem;color:rgba(245,240,232,0.75)">Platalea leucorodia</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED WORK -->
+<section class="pub-section" id="publications">
+  <div class="section-label" data-hu="Kiemelt munkák" data-en="Featured Work">Kiemelt munkák</div>
+  <div class="section-divider"></div>
+  <div class="pub-grid">
+    <a href="https://ng.24.hu/foto/onok-kuldtek/2026/02/24/a-margit-zold-aranya/" target="_blank" rel="noopener noreferrer" class="pub-card">
+      <div class="pub-outlet">National Geographic Hungary</div>
+      <div class="pub-title">A Margit zöld aranya</div>
+      <div class="pub-desc" data-hu="Természetfotó a National Geographic Magyarország oldalán — a Margit-sziget zöld kincsei, Budapest." data-en="Wildlife photography featured in National Geographic Hungary — the green treasures of Margit Island, Budapest.">Természetfotó a National Geographic Magyarország oldalán — a Margit-sziget zöld kincsei, Budapest.</div>
+      <span class="pub-arrow">→</span>
+    </a>
+    <a href="https://ng.24.hu/foto/onok-kuldtek/2026/02/19/pablo-a-szajko/" target="_blank" rel="noopener noreferrer" class="pub-card">
+      <div class="pub-outlet">National Geographic Hungary</div>
+      <div class="pub-title">Pablo, a szajkó</div>
+      <div class="pub-desc" data-hu="Egy szajkó portréja — személyiség és városi természet." data-en="Portrait of a Eurasian Jay — personality and urban wildlife coexistence.">Egy szajkó portréja — személyiség és városi természet.</div>
+      <span class="pub-arrow">→</span>
+    </a>
+    <a href="https://ng.24.hu/foto/onok-kuldtek/2026/02/14/orszem-az-agon/" target="_blank" rel="noopener noreferrer" class="pub-card">
+      <div class="pub-outlet">National Geographic Hungary</div>
+      <div class="pub-title">Őrszem az ágon</div>
+      <div class="pub-desc" data-hu="Megjelent a National Geographic Magyarország olvasói fotói között." data-en="Published in National Geographic Hungary's reader photo selection.">Megjelent a National Geographic Magyarország olvasói fotói között.</div>
+      <span class="pub-arrow">→</span>
+    </a>
+    <a href="https://ng.24.hu/foto/onok-kuldtek/2026/03/09/erdei-egyensuly/" target="_blank" rel="noopener noreferrer" class="pub-card">
+      <div class="pub-outlet">National Geographic Hungary</div>
+      <div class="pub-title">Erdei egyensúly</div>
+      <div class="pub-desc" data-hu="A magyar erdők ökológiai egyensúlyának dokumentálása." data-en="Documenting the ecological equilibrium of Hungarian woodland habitats.">A magyar erdők ökológiai egyensúlyának dokumentálása.</div>
+      <span class="pub-arrow">→</span>
+    </a>
+    <a href="https://www.bnpi.hu/hu/hir/harkalymegfigyelo-turaval-unnepeltuk-az-erdok-vilagnapjat" target="_blank" rel="noopener noreferrer" class="pub-card">
+      <div class="pub-outlet">Bükki Nemzeti Park</div>
+      <div class="pub-title">Harkálymegfigyelő túra — Erdők Világnapja</div>
+      <div class="pub-desc" data-hu="Harkálymegfigyelő túra az Erdők Világnapján a Bükki Nemzeti Parkban. Nagy fakopáncs, fekete harkály és a ritka fehérhátú fakopáncs dokumentálása." data-en="Woodpecker survey tour for World Forest Day in Bükk National Park. Documenting Great Spotted, Black, and the rare White-backed Woodpecker.">Harkálymegfigyelő túra az Erdők Világnapján a Bükki Nemzeti Parkban. Nagy fakopáncs, fekete harkály és a ritka fehérhátú fakopáncs dokumentálása.</div>
+      <span class="pub-arrow">→</span>
+    </a>
+    <a href="https://ng.24.hu/foto/onok-kuldtek/2026/02/19/varakozas-48/" target="_blank" rel="noopener noreferrer" class="pub-card">
+      <div class="pub-outlet">National Geographic Hungary</div>
+      <div class="pub-title">Várakozás</div>
+      <div class="pub-desc" data-hu="A természetfotózás csendes művészete — megjelent a National Geographic Magyarország oldalán." data-en="The quiet art of wildlife waiting — published in National Geographic Hungary.">A természetfotózás csendes művészete — megjelent a National Geographic Magyarország oldalán.</div>
+      <span class="pub-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="photos">
+  <div class="gallery-intro">
+    <div>
+      <div class="section-label" data-hu="Természetfotózás" data-en="Photography">Természetfotózás</div>
+      <div class="section-title" data-hu="A terepen" data-en="From the Field">A terepen</div>
+    </div>
+    <a href="https://media.ebird.org/catalog?birdOnly=true&mediaType=photo&userId=USER8582397" target="_blank" rel="noopener noreferrer" class="btn btn-outline" data-hu="Összes fotó a Macaulay Library-ban →" data-en="All photos on Macaulay Library →">Összes fotó a Macaulay Library-ban →</a>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-item"><div class="gallery-placeholder"><span>🦜</span><p>Garrulus glandarius</p></div><div class="gallery-overlay"><span class="gallery-species"><em>Garrulus glandarius</em></span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder"><span>🐦</span><p>Dendrocopos major</p></div><div class="gallery-overlay"><span class="gallery-species"><em>Dendrocopos major</em></span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder"><span>🦉</span><p>Strix aluco</p></div><div class="gallery-overlay"><span class="gallery-species"><em>Strix aluco</em></span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder"><span>🐦‍⬛</span><p>Dryocopus martius</p></div><div class="gallery-overlay"><span class="gallery-species"><em>Dryocopus martius</em></span></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder"><span>🌿</span><p>Margit-sziget</p></div><div class="gallery-overlay"><span class="gallery-species"><em>Városi ökológia, Budapest</em></span></div></div>
+  </div>
+  <p class="archive-note" data-hu="A teljes fotóarchívum elérhető a Macaulay Library / eBird oldalán." data-en="Full photo archive available on Macaulay Library / eBird.">A teljes fotóarchívum elérhető a Macaulay Library / eBird oldalán.</p>
+</section>
+
+<!-- PUBLICATIONS / MY WRITINGS -->
+<section class="writings-section" id="writings">
+  <div class="section-label" data-hu="Publikációk" data-en="Publications">Publikációk</div>
+  <div class="section-title" data-hu="Saját írásaim" data-en="My Writings">Saját írásaim</div>
+  <div class="section-divider"></div>
+  <div class="writings-grid" id="writingsGrid">
+    <div class="writing-card writing-card--empty">
+      <div class="writing-empty-label" data-hu="Hamarosan — az első bejegyzés készülőben van." data-en="Coming soon — first entry in progress.">Hamarosan — az első bejegyzés készülőben van.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-text">
+    <div class="section-label" data-hu="Rólam" data-en="About">Rólam</div>
+    <h2 class="section-title" data-hu="Terepmunka,<br>fotózás,<br>&amp; tudomány." data-en="Fieldwork,<br>photography,<br>&amp; science.">Terepmunka,<br>fotózás,<br>&amp; tudomány.</h2>
+    <div class="section-divider" style="background:rgba(245,240,232,0.3)"></div>
+    <p class="about-body" data-hu="Tanuló ornitológus és természetfotós, Budapest. Fotóim megjelentek a National Geographic Magyarország, a Bükki Nemzeti Park Igazgatóság és a Hortobágyi Nemzeti Park Igazgatóság oldalain. A WWF Magyarország PandaBanda Regeneráció tagja. Jelenleg a Cornell Lab Átfogó Madárbiológia kurzusát hallgatom — fajokat naplózok, checklistákat töltök fel, és minden lehetséges időt a terepen töltök." data-en="Ornithology student and wildlife photographer based in Budapest. Photos appeared in National Geographic Hungary, Bükki Nemzeti Park, and Hortobágy Nemzeti Park. Member of WWF Hungary's PandaBanda Regeneráció. Currently completing Cornell Lab's Comprehensive Bird Biology course — logging species, submitting checklists, and spending as much time in the field as possible.">Tanuló ornitológus és természetfotós, Budapest. Fotóim megjelentek a National Geographic Magyarország, a Bükki Nemzeti Park Igazgatóság és a Hortobágyi Nemzeti Park Igazgatóság oldalain. A WWF Magyarország PandaBanda Regeneráció tagja. Jelenleg a Cornell Lab Átfogó Madárbiológia kurzusát hallgatom — fajokat naplózok, checklistákat töltök fel, és minden lehetséges időt a terepen töltök.</p>
+    <div class="about-tags">
+      <span class="tag">eBird</span>
+      <span class="tag">Macaulay Library</span>
+      <span class="tag">Bükki NP</span>
+      <span class="tag">Hortobágy NP</span>
+      <span class="tag">WWF PandaBanda</span>
+      <span class="tag">Cornell Lab</span>
+      <span class="tag">NocMig</span>
+    </div>
+  </div>
+  <div class="about-aside">
+    <div class="contact-item">
+      <span class="contact-item-label" data-hu="eBird profil" data-en="eBird Profile">eBird profil</span>
+      <a href="https://ebird.org/profile/ODU4MjM5Nw/HU" target="_blank" rel="noopener noreferrer" class="contact-item-value">ebird.org → Katona Ádám</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label" data-hu="Fotóarchívum" data-en="Photo Archive">Fotóarchívum</span>
+      <a href="https://media.ebird.org/catalog?birdOnly=true&mediaType=photo&userId=USER8582397" target="_blank" rel="noopener noreferrer" class="contact-item-value">Macaulay Library</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label">Instagram</span>
+      <a href="https://www.instagram.com/birdsbykatona/" target="_blank" rel="noopener noreferrer" class="contact-item-value">@birdsbykatona</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label">LinkedIn</span>
+      <a href="https://linkedin.com/in/adamkatona" target="_blank" rel="noopener noreferrer" class="contact-item-value">linkedin.com/in/adamkatona</a>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label" data-hu="Fotók megjelentek" data-en="Photos appeared in">Fotók megjelentek</span>
+      <span class="contact-item-value">National Geographic Hungary</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label" data-hu="Partner intézmények" data-en="Partner institutions">Partner intézmények</span>
+      <span class="contact-item-value">Bükki NP · Hortobágy NP</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label" data-hu="Város" data-en="Based in">Város</span>
+      <span class="contact-item-value" data-hu="Budapest, Magyarország" data-en="Budapest, Hungary">Budapest, Magyarország</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name" data-hu="Katona Ádám — Tanuló ornitológus &amp; Természetfotós" data-en="Katona Ádám — Ornithology Student &amp; Wildlife Photographer">Katona Ádám — Tanuló ornitológus &amp; Természetfotós</span>
+  <span class="footer-copy" data-hu="Minden fotó © Katona Ádám" data-en="All photographs © Katona Ádám">Minden fotó © Katona Ádám</span>
+</footer>
+
+<script>
+  // ── UTILITIES ─────────────────────────────────────────
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function isSafeAssetId(id) {
+    return typeof id === 'string' && /^[a-zA-Z0-9_-]+$/.test(id);
+  }
+
+  // ── LANGUAGE ──────────────────────────────────────────
+  const ALLOWED_LANGS = ['hu', 'en'];
+  let currentLang = 'hu';
+
+  function setLang(lang) {
+    if (!ALLOWED_LANGS.includes(lang)) return;
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.getElementById('btnHU').classList.toggle('active', lang === 'hu');
+    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+    document.querySelectorAll('[data-hu]').forEach(function(el) {
+      var text = el.getAttribute('data-' + lang);
+      if (text !== null) el.innerHTML = text;
+    });
+    document.title = lang === 'hu' ? 'Katona \u00c1d\u00e1m \u2014 Portf\u00f3li\u00f3' : 'Katona \u00c1d\u00e1m \u2014 Portfolio';
+  }
+
+  function detectLang() {
+    var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    return lang.startsWith('hu') ? 'hu' : 'en';
+  }
+
+  // ── DARK MODE ─────────────────────────────────────────
+  function applyTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    document.getElementById('darkToggle').classList.toggle('on', dark);
+    document.getElementById('darkLabel').textContent = dark ? '\u2600\ufe0f' : '\ud83c\udf19';
+    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch(e) {}
+  }
+
+  function toggleDark() {
+    applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+  }
+
+  var savedTheme = '';
+  try { savedTheme = localStorage.getItem('theme') || ''; } catch(e) {}
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    applyTheme(savedTheme === 'dark');
+  } else {
+    applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    var stored = '';
+    try { stored = localStorage.getItem('theme') || ''; } catch(ex) {}
+    if (!stored) applyTheme(e.matches);
+  });
+
+  setLang(detectLang());
+
+  // ── COUNTERS ──────────────────────────────────────────
+  function animateCounter(el, target, duration) {
+    if (!el) return;
+    duration = duration || 2000;
+    var start = 0;
+    var step = target / (duration / 16);
+    var timer = setInterval(function() {
+      start += step;
+      if (start >= target) { el.textContent = target; clearInterval(timer); }
+      else { el.textContent = Math.floor(start); }
+    }, 16);
+  }
+
+  window.addEventListener('load', function() {
+    animateCounter(document.getElementById('counterChecklists'), 115);
+    animateCounter(document.getElementById('counterSpecies'), 81);
+  });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        animateCounter(document.getElementById('bigCounter'), 81);
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  var speciesSection = document.getElementById('species');
+  if (speciesSection) observer.observe(speciesSection);
+
+  // ── MACAULAY PHOTOS ───────────────────────────────────
+  async function loadMacaulayPhotos() {
+    var grid = document.getElementById('galleryGrid');
+    if (!grid) return;
+    try {
+      var res = await fetch('https://search.macaulaylibrary.org/api/v1/search?userId=USER8582397&mediaType=photo&sort=upload_date_desc&count=5');
+      if (!res.ok) throw new Error('API error ' + res.status);
+      var data = await res.json();
+      var content = (data.results && Array.isArray(data.results.content)) ? data.results.content : [];
+      if (!content.length) return;
+      var items = grid.querySelectorAll('.gallery-item');
+      content.slice(0, 5).forEach(function(photo, i) {
+        if (!items[i]) return;
+        if (!isSafeAssetId(photo.assetId)) return;
+        var imgUrl = 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/' + photo.assetId + '/1800';
+        var img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = escapeHtml(photo.sciName || '');
+        img.loading = 'lazy';
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;filter:saturate(0.9)';
+        img.addEventListener('mouseover', function() { img.style.transform = 'scale(1.04)'; });
+        img.addEventListener('mouseout', function() { img.style.transform = 'scale(1)'; });
+        var overlay = document.createElement('div');
+        overlay.className = 'gallery-overlay';
+        var label = document.createElement('span');
+        label.className = 'gallery-species';
+        var em = document.createElement('em');
+        em.textContent = photo.sciName || '';
+        label.appendChild(em);
+        overlay.appendChild(label);
+        items[i].innerHTML = '';
+        items[i].appendChild(img);
+        items[i].appendChild(overlay);
+      });
+    } catch(e) {
+      console.log('Macaulay fetch failed, using placeholders');
+    }
+  }
+  loadMacaulayPhotos();
+</script>
+
+</body>
+</html>
