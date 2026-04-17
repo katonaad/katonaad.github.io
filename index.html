@@ -32,7 +32,7 @@
 <link rel="preload" as="image" href="hero_heron.jpg" fetchpriority="high">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%234a5c3a'/%3E%3Cpath d='M48 8 C48 8 20 18 16 40 C14 50 20 54 20 54 C20 54 22 44 30 38 C28 42 28 48 32 52 C32 52 36 40 44 28 C40 34 36 38 32 42 C38 28 48 8 48 8 Z' fill='%23b8913a'/%3E%3Cline x1='20' y1='54' x2='32' y2='42' stroke='%23f5f0e8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%234a5c3a'/%3E%3Cpath d='M48 8 C48 8 20 18 16 40 C14 50 20 54 20 54 C20 54 22 44 30 38 C28 42 28 48 32 52 C32 52 36 40 44 28 C40 34 36 38 32 42 C38 28 48 8 48 8 Z' fill='%23b8913a'/%3E%3Cline x1='20' y1='54' x2='32' y2='42' stroke='%23f5f0e8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.download.ams.birds.cornell.edu https://adamkatona.hu; script-src 'self' 'unsafe-inline' https://cloud.umami.is; connect-src https://search.macaulaylibrary.org; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https: ; script-src 'self' 'unsafe-inline' https://cloud.umami.is; connect-src https://search.macaulaylibrary.org https://cloud.umami.is; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -54,6 +54,7 @@
   },
   "knowsAbout": ["Ornithology", "Bird Photography", "Wildlife Photography", "eBird", "Woodpeckers", "Hungarian Birds", "Nature Conservation"]
 }
+
 </script>
 <script type="application/ld+json">
 {
@@ -68,8 +69,10 @@
     "name": "Katona Ádám"
   }
 }
+
 </script>
-<script defer src="https://cloud.umami.is/script.js" data-website-id="REPLACE-WITH-YOUR-UMAMI-ID"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="REPLACE-WITH-YOUR-UMAMI-ID">
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Crimson+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
@@ -95,6 +98,7 @@
     --radius: 22px;
     --content: min(1180px, calc(100vw - 2.5rem));
     --nav-height: 80px;
+    --logo-filter: none;
   }
 
   html[data-theme="dark"] {
@@ -112,6 +116,7 @@
     --nav-bg: rgba(17,17,13,0.72);
     --card-bg: rgba(255,255,255,0.03);
     --shadow: 0 18px 40px rgba(0,0,0,0.28);
+    --logo-filter: brightness(1.15) saturate(0.9) opacity(0.85);
   }
 
   body {
@@ -383,6 +388,11 @@
     color: var(--moss);
     margin-bottom: 1.25rem;
   }
+  html[data-theme="dark"] .hero-kicker {
+    background: rgba(109,133,88,.22);
+    border-color: rgba(147,174,118,.5);
+    color: #b8d49a;
+  }
   .hero-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.6rem, 6vw, 5rem);
@@ -507,38 +517,6 @@
     line-height: 1.5;
   }
 
-  .proof-strip {
-    width: var(--content);
-    margin: 1.15rem auto 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: .9rem;
-  }
-  .proof-card {
-    padding: 1.1rem 1.15rem;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    background: var(--card-bg);
-    box-shadow: var(--shadow);
-  }
-  .proof-card .eyebrow {
-    font-size: .77rem;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--moss);
-  }
-  .proof-card strong {
-    display: block;
-    margin-top: .55rem;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    line-height: 1.2;
-  }
-  .proof-card span {
-    display: block;
-    margin-top: .3rem;
-    color: var(--ink-soft);
-  }
 
   .species-section {
     position: relative;
@@ -901,7 +879,6 @@
     .hero-copy,
     .hero-visual { min-height: auto; }
     .hero-visual { min-height: 560px; }
-    .proof-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   @media (max-width: 820px) {
@@ -913,7 +890,6 @@
     .hero { padding-top: calc(var(--nav-height) + 1rem); }
     .hero-copy { padding: 1.35rem; }
     .hero-highlights,
-    .proof-strip,
     .species-grid,
     .about-points { grid-template-columns: 1fr; }
     .hero-visual { min-height: 430px; }
@@ -1012,6 +988,160 @@
     letter-spacing: .04em;
   }
   .email-reveal-btn:hover { border-color: rgba(184,145,58,.5); background: rgba(184,145,58,.07); }
+  .challenge-q {
+    font-size: 1rem;
+    color: rgba(246,240,231,.9);
+    margin: .6rem 0 .5rem;
+  }
+  .challenge-row {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: .3rem;
+  }
+  .challenge-input {
+    width: 72px;
+    padding: .38rem .6rem;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.06);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .challenge-input::-webkit-outer-spin-button,
+  .challenge-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .challenge-input:focus { outline: none; border-color: rgba(184,145,58,.5); }
+  .challenge-submit {
+    appearance: none;
+    background: var(--moss);
+    color: #f5f0e8;
+    border: none;
+    border-radius: 10px;
+    padding: .38rem .9rem;
+    font-family: inherit;
+    font-size: .96rem;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .challenge-submit:hover { background: var(--moss-deep); }
+  .challenge-error {
+    font-size: .85rem;
+    color: #e07070;
+    margin: 0;
+  }
+
+
+  .vol-group { margin-top: 2.5rem; }
+  .vol-group-label {
+    font-size: .8rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+
+  .support-section {
+    padding: 3.5rem 0;
+    background: var(--warm);
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .support-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+  .ticker-group { overflow: hidden; }
+  .ticker-label {
+    width: var(--content);
+    margin: 0 auto .75rem;
+    font-size: .78rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .ticker-track-wrap {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  .ticker-track {
+    display: flex;
+    gap: 1.2rem;
+    width: max-content;
+    animation: ticker-scroll 55s linear infinite;
+  }
+  #tickerINT {
+    animation-duration: 65s;
+  }
+  .ticker-track:hover { animation-play-state: paused; }
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .ticker-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .45rem;
+    padding: 1rem 1.6rem;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    background: var(--card-bg);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color .2s, transform .2s;
+    flex-shrink: 0;
+    min-width: 140px;
+  }
+  .ticker-item:hover { border-color: rgba(184,145,58,.45); transform: translateY(-2px); }
+  .ticker-logo {
+    height: 32px;
+    width: auto;
+    max-width: 110px;
+    object-fit: contain;
+    filter: var(--logo-filter);
+  }
+  .ticker-logo-fallback {
+    font-family: 'Playfair Display', serif;
+    font-size: .95rem;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .ticker-name {
+    font-size: .82rem;
+    color: var(--ink-soft);
+    letter-spacing: .05em;
+  }
+  .ticker-desc {
+    font-size: .76rem;
+    color: var(--ink-soft);
+    opacity: .7;
+    letter-spacing: .02em;
+    text-align: center;
+    white-space: normal;
+    max-width: 140px;
+    line-height: 1.4;
+  }
+
+
+  .support-header {
+    width: var(--content);
+    margin: 0 auto;
+  }
+  .support-label {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--ink);
+    letter-spacing: -.01em;
+  }
 
 </style>
 </head>
@@ -1065,7 +1195,7 @@
         <h1 class="hero-title" data-hu="Madarak, terepmunka, fotózás." data-en="Birds, fieldwork, photography.">Madarak, terepmunka, fotózás.</h1>
         <p class="hero-subtitle" data-hu="Budapesti tanuló ornitológus és természetfotós vagyok. Itt a terepi megfigyeléseim, eBird-listáim és publikált fotóim láthatók." data-en="I’m an ornithology student and wildlife photographer based in Budapest. This site brings together my field observations, eBird lists, and published photos.">Budapesti tanuló ornitológus és természetfotós vagyok. Itt a terepi megfigyeléseim, eBird-listáim és publikált fotóim láthatók.</p>
         <div class="hero-highlights">
-          <div class="mini-pill"><strong data-hu="Publikált fotók" data-en="Published work">Publikált fotók</strong><span data-hu="National Geographic Magyarország és nemzeti parkok" data-en="National Geographic Hungary and national parks">National Geographic Magyarország és nemzeti parkok</span></div>
+          <div class="mini-pill"><strong data-hu="Publikált fotók" data-en="Appeared on">Publikált fotók</strong><span data-hu="National Geographic Magyarország és nemzeti parkok" data-en="National Geographic Hungary and national parks">National Geographic Magyarország és nemzeti parkok</span></div>
           <div class="mini-pill"><strong data-hu="Fókusz" data-en="Focus">Fókusz</strong><span data-hu="Madármegfigyelés, harkályfajok, városi ökológia" data-en="Bird observation, woodpeckers, urban ecology">Madármegfigyelés, harkályfajok, városi ökológia</span></div>
           <div class="mini-pill"><strong data-hu="Módszer" data-en="Method">Módszer</strong><span data-hu="Terepi munka, fotóarchívum, folyamatos naplózás" data-en="Fieldwork, photo archive, continuous logging">Terepi munka, fotóarchívum, folyamatos naplózás</span></div>
         </div>
@@ -1092,35 +1222,14 @@
             <span class="hero-stat-label" data-hu="Faj egy nap alatt" data-en="Species in one day">Faj egy nap alatt</span>
           </div>
           <div class="hero-stat">
-            <span class="hero-stat-num">6</span>
+            <span class="hero-stat-num">9</span>
             <span class="hero-stat-label" data-hu="Fotómegjelenés" data-en="Published appearances">Fotómegjelenés</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="proof-strip fade-up" style="transition-delay:.15s">
-      <div class="proof-card">
-        <span class="eyebrow" data-hu="Megjelenés" data-en="Published in">Megjelenés</span>
-        <strong>National Geographic Hungary</strong>
-        <span data-hu="Válogatott természetfotók" data-en="Selected wildlife photography">Válogatott természetfotók</span>
-      </div>
-      <div class="proof-card">
-        <span class="eyebrow" data-hu="Intézmények" data-en="Institutions">Intézmények</span>
-        <strong>Bükki NP · Hortobágy NP</strong>
-        <span data-hu="Terepi és természetvédelmi kötődés" data-en="Field and conservation context">Terepi és természetvédelmi kötődés</span>
-      </div>
-      <div class="proof-card">
-        <span class="eyebrow" data-hu="Közösség" data-en="Community">Közösség</span>
-        <strong>WWF PandaBanda</strong>
-        <span data-hu="Regenerációs szemlélet" data-en="Regeneration-oriented mindset">Regenerációs szemlélet</span>
-      </div>
-      <div class="proof-card">
-        <span class="eyebrow" data-hu="Képzések" data-en="Courses">Képzések</span>
-        <strong>Cornell Lab · Alison</strong>
-        <span data-hu="Teljesített és folyamatban lévő kurzusok" data-en="Completed and ongoing courses">Teljesített és folyamatban lévő kurzusok</span>
-      </div>
-    </div>
+
   </header>
 
   <main id="main">
@@ -1156,8 +1265,8 @@
     <section id="publications">
       <div class="container">
         <div class="section-label fade-up" data-hu="Kiemelt munkák" data-en="Featured work">Kiemelt munkák</div>
-        <h2 class="section-title fade-up" data-hu="Publikált képek." data-en="Published work.">Publikált képek.</h2>
-        <p class="section-lead fade-up" data-hu="Néhány megjelenés a publikált munkák közül." data-en="A selection of published work.">Néhány megjelenés a publikált munkák közül.</p>
+        <h2 class="section-title fade-up" data-hu="Publikált képek." data-en="Appeared on.">Publikált képek.</h2>
+        <p class="section-lead fade-up" data-hu="Néhány megjelenés a publikált munkák közül." data-en="A selection of appearances.">Néhány megjelenés a publikált munkák közül.</p>
         <div class="section-divider fade-up"></div>
 
         <div class="feature-grid">
@@ -1182,7 +1291,7 @@
           <a href="https://ng.24.hu/foto/onok-kuldtek/2026/03/09/erdei-egyensuly/" target="_blank" rel="noopener noreferrer" class="feature-card fade-up">
             <div class="feature-outlet">National Geographic Hungary</div>
             <div class="feature-title">Erdei egyensúly</div>
-            <div class="feature-desc" data-hu="Erdői jelenet természetes hangulattal." data-en="Woodland scene with a calm natural mood.">Erdői jelenet természetes hangulattal.</div>
+            <div class="feature-desc" data-hu="Erdei jelenet természetes hangulattal." data-en="A woodland scene with a calm, natural mood.">Erdei jelenet természetes hangulattal.</div>
             <span class="card-arrow" data-hu="Megnyitás →" data-en="Open →">Megnyitás →</span>
           </a>
           <a href="https://www.bnpi.hu/hu/hir/harkalymegfigyelo-turaval-unnepeltuk-az-erdok-vilagnapjat" target="_blank" rel="noopener noreferrer" class="feature-card fade-up">
@@ -1203,6 +1312,24 @@
             <div class="feature-desc" data-hu="Természetfotó megjelenés a Hortobágyi Nemzeti Park felületén." data-en="Wildlife photography published on the Hortobágy National Park platform.">Természetfotó megjelenés a Hortobágyi Nemzeti Park felületén.</div>
             <span class="card-arrow" data-hu="Megnyitás →" data-en="Open →">Megnyitás →</span>
           </a>
+          <a href="https://ng.24.hu/foto/onok-kuldtek/2026/04/08/fekete-feny-2/" target="_blank" rel="noopener noreferrer" class="feature-card fade-up">
+            <div class="feature-outlet">National Geographic Hungary</div>
+            <div class="feature-title">Fekete fény</div>
+            <div class="feature-desc" data-hu="Kontrasztos madárportré természetes fénnyel." data-en="High-contrast bird portrait in natural light.">Kontrasztos madárportré természetes fénnyel.</div>
+            <span class="card-arrow" data-hu="Megnyitás →" data-en="Open →">Megnyitás →</span>
+          </a>
+          <a href="https://ng.24.hu/foto/onok-kuldtek/2026/04/08/hajnalhasadas-11/" target="_blank" rel="noopener noreferrer" class="feature-card fade-up">
+            <div class="feature-outlet">National Geographic Hungary</div>
+            <div class="feature-title">Hajnalhasadás</div>
+            <div class="feature-desc" data-hu="Korai terepmunka, hajnali fényben készült kép." data-en="Early fieldwork, captured in dawn light.">Korai terepmunka, hajnali fényben készült kép.</div>
+            <span class="card-arrow" data-hu="Megnyitás →" data-en="Open →">Megnyitás →</span>
+          </a>
+          <a href="https://ng.24.hu/foto/onok-kuldtek/2026/04/08/emelkedes-3/" target="_blank" rel="noopener noreferrer" class="feature-card fade-up">
+            <div class="feature-outlet">National Geographic Hungary</div>
+            <div class="feature-title">Emelkedés</div>
+            <div class="feature-desc" data-hu="Madár felszállás közben, dinamikus kompozíció." data-en="Bird in flight, dynamic composition.">Madár felszállás közben, dinamikus kompozíció.</div>
+            <span class="card-arrow" data-hu="Megnyitás →" data-en="Open →">Megnyitás →</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1213,7 +1340,7 @@
           <div>
             <div class="section-label" data-hu="Természetfotózás" data-en="Photography">Természetfotózás</div>
             <h2 class="section-title" data-hu="Fotók." data-en="Photos.">Fotók.</h2>
-            <p class="section-lead" data-hu="A galéria a Macaulay Library fotóiból tölt be véletlenszerű válogatást." data-en="The gallery loads a random selection from the Macaulay Library.">A galéria a Macaulay Library fotóiból tölt be véletlenszerű válogatást.</p>
+            <p class="section-lead" data-hu="A galéria a Macaulay Library archívumából tölt be véletlenszerű válogatást." data-en="The gallery loads a random selection from the Macaulay Library.">A galéria a Macaulay Library archívumából tölt be véletlenszerű válogatást.</p>
           </div>
           <a href="https://media.ebird.org/catalog?birdOnly=true&mediaType=photo&userId=USER8582397" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-hu="Teljes archívum megnyitása" data-en="Open full archive">Teljes archívum megnyitása</a>
         </div>
@@ -1252,9 +1379,7 @@
 
         <div class="writings-grid">
           <article class="writing-card writing-card-empty fade-up">
-            <div class="writing-date" data-hu="Készülőben" data-en="In progress">Készülőben</div>
-            <div class="writing-title" data-hu="Városi harkályok Budapesten" data-en="Urban Woodpeckers of Budapest">Városi harkályok Budapesten</div>
-            <div class="writing-excerpt" data-hu="Négy faj, négy stratégia — terepi megfigyelések és eBird-adatok alapján." data-en="Four species, four strategies — based on field observations and eBird data.">Négy faj, négy stratégia — terepi megfigyelések és eBird-adatok alapján.</div>
+            <p data-hu="Hamarosan." data-en="Coming soon.">Hamarosan.</p>
           </article>
         </div>
       </div>
@@ -1267,71 +1392,111 @@
         <h2 class="section-title fade-up" data-hu="Tapasztalat." data-en="Experience.">Tapasztalat.</h2>
         <div class="section-divider fade-up"></div>
 
-        <div class="vol-grid fade-up">
-
-          <div class="vol-card">
-            <div class="vol-header">
-              <span class="vol-type" data-hu="Önkéntesség" data-en="Volunteering">Önkéntesség</span>
+        <div class="vol-group fade-up">
+          <div class="vol-group-label" data-hu="Folyamatban" data-en="Ongoing">Folyamatban</div>
+          <div class="vol-grid">
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Önkéntesség" data-en="Volunteering">Önkéntesség</span>
+                <span class="vol-badge" data-hu="Aktív" data-en="Active">Aktív</span>
+              </div>
+              <div class="vol-title">WWF Hungary</div>
+              <div class="vol-sub" data-hu="Önkéntes · PandaBanda Regeneráció" data-en="Volunteer · PandaBanda Regeneráció">Önkéntes · PandaBanda Regeneráció</div>
             </div>
-            <div class="vol-title">WWF Hungary</div>
-            <div class="vol-sub" data-hu="Önkéntes · PandaBanda Regeneráció" data-en="Volunteer · PandaBanda Regeneráció">Önkéntes · PandaBanda Regeneráció</div>
-          </div>
-
-          <div class="vol-card">
-            <div class="vol-header">
-              <span class="vol-type" data-hu="Tanúsítvány" data-en="Certificate">Tanúsítvány</span>
-              <span class="vol-badge" data-hu="Teljesítve" data-en="Completed">Teljesítve</span>
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Kurzus" data-en="Course">Kurzus</span>
+                <span class="vol-badge vol-badge--progress" data-hu="Folyamatban" data-en="In progress">Folyamatban</span>
+              </div>
+              <div class="vol-title">Ornithology: Comprehensive Bird Biology</div>
+              <div class="vol-sub">Cornell Lab of Ornithology</div>
             </div>
-            <div class="vol-title">eBird Essentials</div>
-            <div class="vol-sub">Cornell Lab of Ornithology</div>
-          </div>
-
-          <div class="vol-card">
-            <div class="vol-header">
-              <span class="vol-type" data-hu="Tanúsítvány" data-en="Certificate">Tanúsítvány</span>
-              <span class="vol-badge" data-hu="Teljesítve" data-en="Completed">Teljesítve</span>
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Tanulmány" data-en="Study">Tanulmány</span>
+                <span class="vol-badge vol-badge--progress" data-hu="Folyamatban" data-en="In progress">Folyamatban</span>
+              </div>
+              <div class="vol-title" data-hu="1996. évi LIII. törvény a természet védelméről" data-en="Act LIII of 1996 on Nature Conservation">1996. évi LIII. törvény a természet védelméről</div>
+              <div class="vol-sub" data-hu="Magyar természetvédelmi jogszabály" data-en="Hungarian nature conservation law">Magyar természetvédelmi jogszabály</div>
             </div>
-            <div class="vol-title">Introduction to Ornithology</div>
-            <div class="vol-sub">Alison</div>
-          </div>
-
-          <div class="vol-card">
-            <div class="vol-header">
-              <span class="vol-type" data-hu="Kurzus" data-en="Course">Kurzus</span>
-              <span class="vol-badge vol-badge--progress" data-hu="Folyamatban" data-en="In progress">Folyamatban</span>
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Kurzus" data-en="Course">Kurzus</span>
+                <span class="vol-badge vol-badge--progress" data-hu="Folyamatban" data-en="In progress">Folyamatban</span>
+              </div>
+              <div class="vol-title">Introduction to QGIS</div>
             </div>
-            <div class="vol-title">Ornithology: Comprehensive Bird Biology</div>
-            <div class="vol-sub">Cornell Lab of Ornithology</div>
           </div>
-
-          <div class="vol-card">
-            <div class="vol-header">
-              <span class="vol-type" data-hu="Pályázat" data-en="Application">Pályázat</span>
-              <span class="vol-badge vol-badge--pending" data-hu="Jelentkezve" data-en="Applied">Jelentkezve</span>
-            </div>
-            <div class="vol-title">Ifjú Kócsagőr</div>
-            <div class="vol-sub" data-hu="Természetvédelmi önkéntes program" data-en="Nature conservation volunteer programme">Természetvédelmi önkéntes program</div>
-          </div>
-
-          <div class="vol-card">
-            <div class="vol-header">
-              <span class="vol-type" data-hu="Önkéntesség" data-en="Volunteering">Önkéntesség</span>
-              <span class="vol-badge vol-badge--pending" data-hu="Jelentkezve" data-en="Applied">Jelentkezve</span>
-            </div>
-            <div class="vol-title">MME</div>
-            <div class="vol-sub" data-hu="Magyar Madártani és Természetvédelmi Egyesület — önkéntes" data-en="BirdLife Hungary — volunteer">Magyar Madártani és Természetvédelmi Egyesület — önkéntes</div>
-          </div>
-
-          <div class="vol-card">
-            <div class="vol-header">
-              <span class="vol-type" data-hu="Felsőoktatás" data-en="Higher education">Felsőoktatás</span>
-              <span class="vol-badge vol-badge--pending" data-hu="Jelentkezve" data-en="Applied">Jelentkezve</span>
-            </div>
-            <div class="vol-title">MATE</div>
-            <div class="vol-sub" data-hu="Természetvédelmi mérnök BSc" data-en="Nature Conservation Engineering BSc">Természetvédelmi mérnök BSc</div>
-          </div>
-
         </div>
+
+        <div class="vol-group fade-up">
+          <div class="vol-group-label" data-hu="Jelentkezve" data-en="Applied">Jelentkezve</div>
+          <div class="vol-grid">
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Pályázat" data-en="Application">Pályázat</span>
+                <span class="vol-badge vol-badge--pending" data-hu="Jelentkezve" data-en="Applied">Jelentkezve</span>
+              </div>
+              <div class="vol-title">Ifjú Kócsagőr</div>
+              <div class="vol-sub" data-hu="Természetvédelmi önkéntes program" data-en="Nature conservation volunteer programme">Természetvédelmi önkéntes program</div>
+            </div>
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Önkéntesség" data-en="Volunteering">Önkéntesség</span>
+                <span class="vol-badge vol-badge--pending" data-hu="Jelentkezve" data-en="Applied">Jelentkezve</span>
+              </div>
+              <div class="vol-title">MME</div>
+              <div class="vol-sub" data-hu="Magyar Madártani és Természetvédelmi Egyesület — önkéntes" data-en="BirdLife Hungary — volunteer">Magyar Madártani és Természetvédelmi Egyesület — önkéntes</div>
+            </div>
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Felsőoktatás" data-en="Higher education">Felsőoktatás</span>
+                <span class="vol-badge vol-badge--pending" data-hu="Jelentkezve" data-en="Applied">Jelentkezve</span>
+              </div>
+              <div class="vol-title">MATE</div>
+              <div class="vol-sub" data-hu="Természetvédelmi mérnök BSc" data-en="Nature Conservation Engineering BSc">Természetvédelmi mérnök BSc</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vol-group fade-up">
+          <div class="vol-group-label" data-hu="Teljesítve" data-en="Completed">Teljesítve</div>
+          <div class="vol-grid">
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Tanúsítvány" data-en="Certificate">Tanúsítvány</span>
+                <span class="vol-badge" data-hu="Teljesítve" data-en="Completed">Teljesítve</span>
+              </div>
+              <div class="vol-title">eBird Essentials</div>
+              <div class="vol-sub">Cornell Lab of Ornithology</div>
+            </div>
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Tanúsítvány" data-en="Certificate">Tanúsítvány</span>
+                <span class="vol-badge" data-hu="Teljesítve" data-en="Completed">Teljesítve</span>
+              </div>
+              <div class="vol-title">Introduction to Ornithology</div>
+              <div class="vol-sub">Alison</div>
+            </div>
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Önkéntesség" data-en="Volunteering">Önkéntesség</span>
+                <span class="vol-badge" data-hu="Teljesítve" data-en="Completed">Teljesítve</span>
+              </div>
+              <div class="vol-title">WWF PandaBanda Regeneráció</div>
+              <div class="vol-sub" data-hu="Regenerációs önkéntes program" data-en="Regeneration volunteer programme">Regenerációs önkéntes program</div>
+            </div>
+            <div class="vol-card">
+              <div class="vol-header">
+                <span class="vol-type" data-hu="Képesítés" data-en="Qualification">Képesítés</span>
+                <span class="vol-badge" data-hu="Teljesítve" data-en="Completed">Teljesítve</span>
+              </div>
+              <div class="vol-title" data-hu="Aranykalászos gazda" data-en="Certified Farmer">Aranykalászos gazda</div>
+              <div class="vol-sub" data-hu="Agrárszakmai képesítés" data-en="Agricultural qualification, Hungary">Agrárszakmai képesítés</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1348,15 +1513,7 @@
             <div class="about-point"><strong data-hu="Tanulás" data-en="Study">Tanulás</strong><span data-hu="Cornell Lab kurzus és folyamatos terepi önképzés." data-en="Cornell Lab coursework and continuous field-based learning.">Cornell Lab kurzus és folyamatos terepi önképzés.</span></div>
             <div class="about-point"><strong data-hu="Irány" data-en="Direction">Irány</strong><span data-hu="Természetvédelem, fajismeret, vizuális kommunikáció." data-en="Conservation, species knowledge, and visual communication.">Természetvédelem, fajismeret, vizuális kommunikáció.</span></div>
           </div>
-          <div class="tags">
-            <span class="tag">eBird</span>
-            <span class="tag">Macaulay Library</span>
-            <span class="tag">Bükki NP</span>
-            <span class="tag">Hortobágy NP</span>
-            <span class="tag">WWF PandaBanda</span>
-            <span class="tag">Cornell Lab</span>
-            <span class="tag">NocMig</span>
-          </div>
+
         </div>
 
         <aside class="contact-panel fade-up" style="transition-delay:.08s">
@@ -1372,27 +1529,129 @@
             <span class="contact-label">Instagram</span>
             <a class="contact-value" href="https://www.instagram.com/birdsbykatona/" target="_blank" rel="noopener noreferrer">@birdsbykatona</a>
           </div>
-          <div class="contact-item">
-            <span class="contact-label" data-hu="Megjelenés" data-en="Published in">Megjelenés</span>
-            <span class="contact-value">National Geographic Hungary</span>
-          </div>
-          <div class="contact-item">
-            <span class="contact-label" data-hu="Partner intézmények" data-en="Partner institutions">Partner intézmények</span>
-            <span class="contact-value">Bükki NP · Hortobágy NP</span>
-          </div>
+
+
           <div class="contact-item">
             <span class="contact-label" data-hu="Bázis" data-en="Based in">Bázis</span>
             <span class="contact-value" data-hu="Budapest, Magyarország" data-en="Budapest, Hungary">Budapest, Magyarország</span>
           </div>
           <div class="contact-item">
             <span class="contact-label" data-hu="E-mail" data-en="Email">E-mail</span>
-            <button class="email-reveal-btn" id="emailReveal" onclick="revealEmail()" data-hu="E-mail megjelenítése" data-en="Show email">E-mail megjelenítése</button>
-            <a class="contact-value email-address" id="emailAddress" href="#" style="display:none"></a>
+            <div id="emailWidget">
+              <button class="email-reveal-btn" id="emailReveal" onclick="startEmailChallenge()" data-hu="E-mail megjelenítése" data-en="Show email">E-mail megjelenítése</button>
+              <div id="emailChallenge" style="display:none">
+                <p id="challengeQuestion" class="challenge-q"></p>
+                <div class="challenge-row">
+                  <input type="number" id="challengeInput" class="challenge-input" placeholder="?" autocomplete="off" inputmode="numeric">
+                  <button class="challenge-submit" onclick="checkEmailChallenge()" data-hu="OK" data-en="OK">OK</button>
+                </div>
+                <p id="challengeError" class="challenge-error" style="display:none" data-hu="Helytelen. Próbáld újra." data-en="Incorrect. Try again.">Helytelen. Próbáld újra.</p>
+              </div>
+              <a class="contact-value" id="emailAddress" href="#" style="display:none"></a>
+            </div>
           </div>
         </aside>
       </div>
     </section>
   </main>
+
+  <section id="support" class="support-section">
+    <div class="support-inner">
+
+      <div class="support-header">
+        <p class="support-label" data-hu="Támogasd őket" data-en="Support them">Támogasd őket</p>
+      </div>
+
+      <div class="ticker-group">
+        <div class="ticker-label" data-hu="Magyar" data-en="Hungarian">Magyar</div>
+        <div class="ticker-track-wrap">
+          <div class="ticker-track" id="tickerHU">
+          <a href="https://mme.hu" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://mme.hu/profiles/mme/themes/mme_theme/assets/img/logo.svg" alt="MME" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">MME</span>
+            <span class="ticker-desc" data-hu="Hazai madártan és természetvédelem" data-en="Bird conservation and nature protection in Hungary">Hazai madártan és természetvédelem</span>
+          </a>
+          <a href="https://wwf.hu" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/WWF_logo.svg" alt="WWF Hungary" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">WWF Hungary</span>
+            <span class="ticker-desc" data-hu="Élőhelyek és fajok védelme" data-en="Protecting habitats and species">Élőhelyek és fajok védelme</span>
+          </a>
+          <a href="https://valyo.hu" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <span class="ticker-logo-fallback">Valyo</span>
+            <span class="ticker-desc" data-hu="Budapest és a Duna összekapcsolása" data-en="Connecting Budapest with the Danube">Budapest és a Duna összekapcsolása</span>
+          </a>
+          <a href="https://ujklimatorveny.hu" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <span class="ticker-logo-fallback">Új Klímatörvény</span>
+            <span class="ticker-desc" data-hu="Klímavédelem jogi keretek között" data-en="Climate protection through legislation">Klímavédelem jogi keretek között</span>
+          </a>
+          <a href="https://bnpi.hu" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://bnpi.hu/images/bnpi_logo.png" alt="Bükki NP" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">Bükki NP</span>
+            <span class="ticker-desc" data-hu="Védett természet az Északi-középhegységben" data-en="Protected nature in the Northern Highlands">Védett természet az Északi-középhegységben</span>
+          </a>
+          <a href="https://www.facebook.com/FFFHungary/" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Fridays_for_Future_logo.svg/320px-Fridays_for_Future_logo.svg.png" alt="Fridays for Future HU" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">Fridays for Future HU</span>
+            <span class="ticker-desc" data-hu="Klímaakció a jövő generációkért" data-en="Climate action for future generations">Klímaakció a jövő generációkért</span>
+          </a>
+          <a href="https://levego.hu" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <span class="ticker-logo-fallback">Levegő Munkacsoport</span>
+            <span class="ticker-desc" data-hu="Tiszta levegő Magyarországon" data-en="Clean air in Hungary">Tiszta levegő Magyarországon</span>
+          </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticker-group">
+        <div class="ticker-label" data-hu="Nemzetközi" data-en="International">Nemzetközi</div>
+        <div class="ticker-track-wrap">
+          <div class="ticker-track" id="tickerINT">
+          <a href="https://signal.org" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Signal-Logo.svg" alt="Signal" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">Signal</span>
+            <span class="ticker-desc" data-hu="Privát, titkosított kommunikáció mindenkinek" data-en="Private, encrypted communication for everyone">Privát, titkosított kommunikáció mindenkinek</span>
+          </a>
+          <a href="https://linuxfoundation.org" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Linux_Foundation_logo_2013.svg" alt="Linux Foundation" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">Linux Foundation</span>
+            <span class="ticker-desc" data-hu="Nyílt forráskód a digitális szabadságért" data-en="Open source for digital freedom">Nyílt forráskód a digitális szabadságért</span>
+          </a>
+          <a href="https://birdlife.org" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/BirdLife_International_2019_logo.svg/320px-BirdLife_International_2019_logo.svg.png" alt="BirdLife International" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">BirdLife International</span>
+            <span class="ticker-desc" data-hu="Madárfajok globális védelme" data-en="Global protection of bird species">Madárfajok globális védelme</span>
+          </a>
+          <a href="https://rewildingeurope.com" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Rewilding_Europe_logo.svg/320px-Rewilding_Europe_logo.svg.png" alt="Rewilding Europe" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">Rewilding Europe</span>
+            <span class="ticker-desc" data-hu="Vadon élő természet visszaállítása" data-en="Restoring wild nature in Europe">Vadon élő természet visszaállítása</span>
+          </a>
+          <a href="https://openstreetmap.org" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Openstreetmap_logo.svg" alt="OpenStreetMap" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">OpenStreetMap</span>
+            <span class="ticker-desc" data-hu="Szabad térképek mindenkinek" data-en="Free maps for everyone">Szabad térképek mindenkinek</span>
+          </a>
+          <a href="https://birds.cornell.edu" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Cornell_Lab_of_Ornithology_logo.svg/320px-Cornell_Lab_of_Ornithology_logo.svg.png" alt="Cornell Lab" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">Cornell Lab</span>
+            <span class="ticker-desc" data-hu="Ornitológia és madártudomány" data-en="Ornithology and bird science">Ornitológia és madártudomány</span>
+          </a>
+          <a href="https://inaturalist.org" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/INaturalist_logo_2020.svg/320px-INaturalist_logo_2020.svg.png" alt="iNaturalist" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">iNaturalist</span>
+            <span class="ticker-desc" data-hu="Közösségi természetmegfigyelés világszerte" data-en="Community nature observation worldwide">Közösségi természetmegfigyelés világszerte</span>
+          </a>
+          <a href="https://ecosia.org" target="_blank" rel="noopener noreferrer" class="ticker-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Ecosia_Logo.svg/320px-Ecosia_Logo.svg.png" alt="Ecosia" class="ticker-logo" onerror="this.style.display='none'">
+            <span class="ticker-logo-fallback">Ecosia</span>
+            <span class="ticker-desc" data-hu="Erdőültetés minden kereséssel" data-en="Planting trees with every search">Erdőültetés minden kereséssel</span>
+          </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <footer>
     <div class="footer-inner">
@@ -1512,7 +1771,7 @@
           link.classList.toggle('active', active);
         });
       });
-    }, { threshold: 0.45 });
+    }, { threshold: 0.2, rootMargin: "0px 0px -20% 0px" });
     sections.forEach(section => spy.observe(section));
   }
 
@@ -1556,16 +1815,50 @@
     }
   }
 
-  function revealEmail() {
-    const btn = document.getElementById('emailReveal');
-    const addr = document.getElementById('emailAddress');
-    if (!btn || !addr) return;
-    // address set at deploy time — placeholder until custom domain email is ready
-    const e = 'REPLACE_WITH_EMAIL';
-    addr.href = 'mailto:' + e;
-    addr.textContent = e;
-    addr.style.display = 'inline-block';
-    btn.style.display = 'none';
+  // Email split to avoid plain-text scraping
+  var _ep = ['katona', 'ad', String.fromCharCode(64), 'gmail', String.fromCharCode(46), 'com'];
+
+  var _cA = 0, _cB = 0;
+
+  function _newChallenge() {
+    _cA = Math.floor(Math.random() * 15) + 3;
+    _cB = Math.floor(Math.random() * 15) + 3;
+    var ops = [
+      { q: _cA + ' + ' + _cB, a: _cA + _cB },
+      { q: _cA + ' × ' + _cB, a: _cA * _cB },
+      { q: (_cA + _cB) + ' − ' + _cB, a: _cA }
+    ];
+    var pick = ops[Math.floor(Math.random() * ops.length)];
+    document.getElementById('challengeQuestion').textContent = pick.q + ' = ?';
+    document.getElementById('challengeInput').value = '';
+    document.getElementById('challengeError').style.display = 'none';
+    return pick.a;
+  }
+
+  var _cAnswer = 0;
+
+  function startEmailChallenge() {
+    document.getElementById('emailReveal').style.display = 'none';
+    document.getElementById('emailChallenge').style.display = 'block';
+    _cAnswer = _newChallenge();
+    document.getElementById('challengeInput').focus();
+  }
+
+  function checkEmailChallenge() {
+    var val = parseInt(document.getElementById('challengeInput').value, 10);
+    if (val === _cAnswer) {
+      var e = _ep.join('');
+      var addr = document.getElementById('emailAddress');
+      addr.href = 'mailto:' + e;
+      addr.textContent = e;
+      addr.style.display = 'inline-block';
+      document.getElementById('emailChallenge').style.display = 'none';
+    } else {
+      var err = document.getElementById('challengeError');
+      err.style.display = 'block';
+      document.getElementById('challengeInput').value = '';
+      _cAnswer = _newChallenge();
+    }
   }
 
   (function initTheme() {
@@ -1592,12 +1885,21 @@
     setupSectionSpy();
     loadMacaulayPhotos();
 
+    ['tickerHU', 'tickerINT'].forEach(function(id) {
+      var track = document.getElementById(id);
+      if (!track) return;
+      track.innerHTML += track.innerHTML;
+    });
+
     document.querySelectorAll('#mobileMenu a').forEach(link => {
       link.addEventListener('click', () => toggleMenu(false));
     });
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') toggleMenu(false);
+      if (e.key === 'Enter' && document.getElementById('emailChallenge') && document.getElementById('emailChallenge').style.display !== 'none') {
+        checkEmailChallenge();
+      }
     });
 
     animateCounter(document.getElementById('counterChecklists'), 115, 1600);
@@ -1617,6 +1919,7 @@
       counterObserver.observe(species);
     }
   });
+
 </script>
 </body>
 </html>
