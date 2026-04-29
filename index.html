@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#4a5c3a">
 <link rel="canonical" href="https://adamkatona.hu/">
 <link rel="alternate" hreflang="hu" href="https://adamkatona.hu/">
-<link rel="alternate" hreflang="en" href="https://adamkatona.hu/?lang=en">
+<link rel="alternate" hreflang="en" href="https://adamkatona.hu/">
 <link rel="alternate" hreflang="x-default" href="https://adamkatona.hu/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://adamkatona.hu/">
@@ -1143,6 +1143,28 @@
     letter-spacing: -.01em;
   }
 
+
+  .nav-instagram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    transition: color .2s;
+    text-decoration: none;
+  }
+  .nav-instagram:hover { color: var(--moss); }
+  .nav-instagram svg { width: 20px; height: 20px; display: block; }
+
+
+  .footer-ebird {
+    font-size: .85rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: .04em;
+    transition: color .2s;
+  }
+  .footer-ebird:hover { color: var(--moss); }
+
 </style>
 </head>
 <body>
@@ -1167,6 +1189,13 @@
           <li><a href="#about" data-hu="Rólam" data-en="About">Rólam</a></li>
         </ul>
         <div class="nav-controls">
+          <a href="https://instagram.com/birdsbykatona" target="_blank" rel="noopener noreferrer" class="nav-instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4.5"/>
+              <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
           <div class="lang-toggle" aria-label="Language switcher">
             <button class="lang-btn active" id="btnHU" onclick="setLang('hu')">HU</button>
             <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
@@ -1184,6 +1213,10 @@
         <a href="#writings" data-hu="Írások" data-en="Writing">Írások</a>
         <a href="#volunteering" data-hu="Képzések" data-en="Certifications">Képzések</a>
         <a href="#about" data-hu="Rólam" data-en="About">Rólam</a>
+        <a href="https://instagram.com/birdsbykatona" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
       </div>
     </div>
   </nav>
@@ -1222,7 +1255,7 @@
             <span class="hero-stat-label" data-hu="Faj egy nap alatt" data-en="Species in one day">Faj egy nap alatt</span>
           </div>
           <div class="hero-stat">
-            <span class="hero-stat-num">8</span>
+            <span class="hero-stat-num">9</span>
             <span class="hero-stat-label" data-hu="Fotómegjelenés" data-en="Published appearances">Fotómegjelenés</span>
           </div>
         </div>
@@ -1320,6 +1353,12 @@
             <div class="feature-outlet">National Geographic Hungary</div>
             <div class="feature-title">Emelkedés</div>
             <div class="feature-desc" data-hu="Madár felszállás közben, dinamikus kompozíció." data-en="Bird in flight, dynamic composition.">Madár felszállás közben, dinamikus kompozíció.</div>
+            <span class="card-arrow" data-hu="Megnyitás →" data-en="Open →">Megnyitás →</span>
+          </a>
+          <a href="https://www.hnp.hu/hu/szervezeti-egyseg/turizmus/2252/terepmadaraszat" target="_blank" rel="noopener noreferrer" class="feature-card fade-up">
+            <div class="feature-outlet">Hortobágyi Nemzeti Park</div>
+            <div class="feature-title">Terepmadarászat</div>
+            <div class="feature-desc" data-hu="Több fotó — madarak, lepkék, hüllők, kétéltűek — a Hortobágyi-halastavi tanösvényen." data-en="Multiple photos — birds, butterflies, reptiles, amphibians — on the Hortobágy fishpond trail.">Több fotó — madarak, lepkék, hüllők, kétéltűek — a Hortobágyi-halastavi tanösvényen.</div>
             <span class="card-arrow" data-hu="Megnyitás →" data-en="Open →">Megnyitás →</span>
           </a>
         </div>
@@ -1657,6 +1696,7 @@
     <div class="footer-inner">
       <span class="footer-name" data-hu="Katona Ádám — Tanuló ornitológus &amp; Természetfotós" data-en="Katona Ádám — Ornithology Student &amp; Wildlife Photographer">Katona Ádám — Tanuló ornitológus &amp; Természetfotós</span>
       <span data-hu="Minden fotó © Katona Ádám" data-en="All photographs © Katona Ádám">Minden fotó © Katona Ádám</span>
+      <a href="https://ebird.org/profile/USER8582397" target="_blank" rel="noopener noreferrer" class="footer-ebird" data-hu="eBird profil ↗" data-en="eBird profile ↗">eBird profil ↗</a>
     </div>
   </footer>
 </div>
@@ -1686,7 +1726,15 @@
     document.getElementById('btnEN').classList.toggle('active', lang === 'en');
     document.querySelectorAll('[data-hu]').forEach(function(el) {
       const value = el.getAttribute('data-' + lang);
-      if (value !== null) el.innerHTML = value;
+      if (value === null) return;
+      // Only use innerHTML for elements that intentionally contain <br> or <em> tags
+      if (value.indexOf('<') !== -1) {
+        // Sanitise: only allow <br>, <em>, </em> — strip everything else
+        const safe = value.replace(/<(?!\/?(?:br|em))[^>]*>/gi, '');
+        el.innerHTML = safe;
+      } else {
+        el.textContent = value;
+      }
     });
     document.title = lang === 'hu' ? 'Katona Ádám — Portfólió' : 'Katona Ádám — Portfolio';
     try { localStorage.setItem('lang', lang); } catch (e) {}
